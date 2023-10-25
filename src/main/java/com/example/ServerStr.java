@@ -43,12 +43,12 @@ public class ServerStr
             {
                 if(stringaRicevuta<n)
                 {
-                    outVersoClient.writeBytes("1");
+                    outVersoClient.writeBytes("1"+'\n');
                     stringaRicevuta=Integer.parseInt(inDalClient.readLine());
                 }
                 else
                 {
-                    outVersoClient.writeBytes("2");
+                    outVersoClient.writeBytes("2"+'\n');
                     stringaRicevuta=Integer.parseInt(inDalClient.readLine());
                 }
             }
