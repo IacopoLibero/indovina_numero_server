@@ -7,7 +7,7 @@ public class ServerStr
 {
     ServerSocket server = null;
     Socket client = null;
-    int stringaRicevuta = 0;
+    String stringaRicevuta;
     BufferedReader inDalClient;
     DataOutputStream outVersoClient;
 
@@ -37,22 +37,24 @@ public class ServerStr
         {
             int n=(int)(Math.random()*100)+1;
             System.out.println(n);
-            outVersoClient.writeBytes("x"+'\n');
-            stringaRicevuta=Integer.parseInt(inDalClient.readLine());
-            while(stringaRicevuta!=n)
+            while(true)
             {
-                if(stringaRicevuta<n)
+                stringaRicevuta=inDalClient.readLine();
+                if(Integer.parseInt(stringaRicevuta)<n)
                 {
                     outVersoClient.writeBytes("1"+'\n');
-                    stringaRicevuta=Integer.parseInt(inDalClient.readLine());
                 }
-                else
+                else if(Integer.parseInt(stringaRicevuta)>n)
                 {
                     outVersoClient.writeBytes("2"+'\n');
-                    stringaRicevuta=Integer.parseInt(inDalClient.readLine());
                 }
+                else
+                 break;
             }
+            
+            
             outVersoClient.writeBytes("3"+'\n');
+            System.out.println("fine");
             client.close();
         }
         catch (Exception e)
